@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
+    <topnav></topnav>
     <router-view/>
+    <topfooter></topfooter>
   </div>
 </template>
 
 <script>
+import topnav from '@/components/common/nav'
+import topfooter from '@/components/common/footer'
 export default {
   name: 'App',
   components:{
-    // htop,
+    topnav,
+    topfooter
   }
 }
 </script>
