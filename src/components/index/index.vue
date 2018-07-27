@@ -180,11 +180,38 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'see',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      data: ""
     }
+  },
+  methods:{
+    getSecMenu() {//接口测试
+      this.$http
+        .get(
+          "http://10.172.246.234:8095/systemManagementService/userService/getSystemFuncList?sign=XqmQHojhmyWBdsbNkMqT.4hkUu9nse0Z1OJgxw3BiFHe8BrGMGo3cN87d4R09IShRLBVGx1gfeCGYA7URHmsEQ--___1532576675086___8000400001___8000400001___8000400001___2___"
+        )
+        .then(res => {
+          if (res.data.code === 1) {
+            res.data.data.systemFuncVOList.forEach(element => {
+            console.log(element.sysfuncId);
+              if (element.sysfuncId === 1) {
+                var data = element.childSystemFuncList;
+                // console.log(data);
+                this.list = data;
+              }
+            });
+          }
+          
+        });
+    }
+
+  },
+  created(){
+    this.getSecMenu();
+    // this.getSecXinlang();
+
   }
 }
 </script>

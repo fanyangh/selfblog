@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 //接口调用
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://10.172.246.234:8095'
+// axios.defaults.baseURL = 'http://10.172.246.234:8095'
 
 
 // Vue.prototype.$msgbox = MessageBox;
