@@ -4,11 +4,14 @@
   <!--menu begin-->
   <div class="menu">
     <nav class="nav" id="topnav">
-      <h1 class="logo"><a href="http://www.yangqq.com">博客</a></h1>
+      <h1 class="logo"><a @click.stop="drop=false;close=true;">博客</a></h1>
 
       <li v-for="(item,index) in configNav" :key="index">
-        <a class="buy-now" @click="judgeBinding(item,index)">{{item.name}}</a>
-        <ul class="sub-nav" style="display:none;">
+        <!-- <router-link :to="{path:item.link}">
+              {{item.text}}
+            </router-link> -->
+        <a class="buy-now" :href="item.link" v-on:onmouseover="changeHover()">{{item.name}}</a>
+        <ul class="sub-nav" v-show="isShow">
           <li v-for="(item,inde) in item.subItems" :key="inde">
             <router-link :to="{path:item.link}">
               {{item.text}}
@@ -91,6 +94,8 @@
 </template>
 
 <script>
+import edit from '@/components/common/configInfo'
+import overlay from '@/components/common/overlay'
 export default {
   name: 'topnav',
   data () {
@@ -98,46 +103,57 @@ export default {
       configNav:[
                     { 
                         name:'关于我',
-                        link:'#/callSource',
-                    },
-                    { 
-                        name:'交换&路由',
-                        link:'#/callSource',
+                        link:'/callSource',
                         subItems:[
-                            { link:'#/callSource',text: '呼叫源',click:true },
-                            { link:'#/cancld',text: '号码分析' },
-                            { link:'#/route',text: '出局路由' }
+                            { link:'/callSource',text: '呼叫源',click:true },
+                            { link:'/cancld',text: '号码分析' },
+                            { link:'/route',text: '出局路由' }
                         ]
                     },
                     { 
                         name:'交换&路由',
-                        link:'#/callSource',
+                        link:'/callSource',
                         subItems:[
-                            { link:'#/callSource',text: '呼叫源',click:true },
-                            { link:'#/cancld',text: '号码分析' },
-                            { link:'#/route',text: '出局路由' }
+                            { link:'/callSource',text: '呼叫源',click:true },
+                            { link:'/cancld',text: '号码分析' },
+                            { link:'/route',text: '出局路由' }
+                        ]
+                    },
+                    { 
+                        name:'交换&路由',
+                        link:'/callSource',
+                        subItems:[
+                            { link:'/callSource',text: '呼叫源',click:true },
+                            { link:'/cancld',text: '号码分析' },
+                            { link:'/route',text: '出局路由' }
                         ]
                     },
                     { 
                         name:'组织&资源',
+                        link:'/callSource',
                         subItems:[
-                            { link:'#/org',text: '组织' },
-                            { link:'#/term',text: '终端' },
+                            { link:'/org',text: '组织' },
+                            { link:'/term',text: '终端' },
                         ]
                     }                   
                 ],
-      arr:""  
+      isShow:"true"  
     }
+  },
+  components:{
+     edit,
+     overlay
   },
   methods:{
      getSecMenu() {//接口测试
       this.$http
         .get(
-          "api"
+          "http://apis.laidx.com/SMS/Send"
         )
         .then(res => {
           if (res.data.code === 1) {
             this.configNav=res.data.data.configNav;
+            console.log(this.configNav);
             // res.data.data.configNav.forEach(element => {
             // console.log(element.name);
             // for(let j in element){
@@ -172,15 +188,14 @@ export default {
     },
 
     
-    showToggle:function(index){  
-                this.isShow = index;  
-            },
-    treeNavSwitch:function(nav){
-                this.linkClick = nav.link;
-            }
+    // showToggle:function(){  
+    //             this.isShow = !this.isShow;  
+    //         }
   },
+  
   created(){
     this.getSecMenu();
+    this.judgeBinding();
     // this.getSecXinlang();
 
   }
