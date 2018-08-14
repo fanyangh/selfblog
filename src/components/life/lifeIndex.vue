@@ -31,14 +31,14 @@ export default {
                 {message:"Test three",id:"3"},
                 {message:"Test three",id:"3"},],
            seeValue:[],//value值
-           books: [],
+           books: [], 
          }   
                 
         },
   methods:{
             
             add:function(){ //添加value值
-                let see=this.$refs.input.value; 
+                let see=this.$refs.input.value; // $refs
                 console.log("see");
                 console.log(see);
                 this.seeValue=see;
@@ -74,6 +74,7 @@ export default {
                   console.log(2);
                   console.log(Books.name);
                   this.books.push(Books.name);
+                  JSON.stringify(this.books)
                  console.log(this.books);
                  
                   
