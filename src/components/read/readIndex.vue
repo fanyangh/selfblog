@@ -1,7 +1,8 @@
 <template>
   <div class="read">
-    <div class="one" v-drag>拖拽one</div>
-	  <!-- <div class="two" v-drag>拖拽two</div> -->
+    <div class="one" v-drag>{{masage | sum(111,111) }}</div>
+	  <div class="two" v-drag>拖拽two</div>
+    <div class="three">{{masage | cal}}</div>
   </div>
 </template>
 
@@ -10,7 +11,8 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      masage:12
     }
   },
   watch:{
@@ -51,6 +53,18 @@ export default {
     }
 
   },
+  filters : {//过滤器
+    cal: function (value) {//可用于数据渲染后的数据处理
+      console.log(1);
+      console.log(value);
+      return value + 10
+    },
+    sum: function (value, begin, xing) {//可用于数据渲染后的数据处理
+      console.log(1);
+      console.log(value);
+      return value +begin +xing+ 10
+    }
+  },
   mounted :{
     
   },
@@ -67,7 +81,7 @@ export default {
   width: 100%;
   position: relative;
 }
-.one,.two{
+.one,.two,.three{
   margin-top: 200px;
 		height:100px;
 		width:100px;
@@ -80,6 +94,9 @@ export default {
 	}
 	.two{
 		left:200px;
+	}
+  .three{
+		left:400px;
 	}
 
 </style>
