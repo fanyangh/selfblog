@@ -9,6 +9,8 @@ import read from './read/index' ;         //金典引用（博客）
 import say from './say/index';            //留言模块
 import time from './time/index';          //时间轴模块
 import technology from './technology/index';   //技术
+import demo from './demo/index';    //demo
+import demoArr from './demo/index';
 
 Vue.use(Router)
 let router = new Router({
@@ -20,7 +22,8 @@ let router = new Router({
     ...say,
     ...time,
     ...unkonwn,
-    ...technology
+    ...technology,
+    ...demo
   ]
 })
 // router.beforeEach((to, from, next) => {
